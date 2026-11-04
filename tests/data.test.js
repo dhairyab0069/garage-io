@@ -84,7 +84,22 @@ ok("shared light/dark/auto theme: key, early script before the stylesheet, radio
   const early = html.indexOf("localStorage.getItem('theme')");
   assert.ok(early > 0 && early < html.indexOf('rel="stylesheet"'));
   assert.ok(html.includes('role="radiogroup" aria-label="Color theme"'));
-  assert.ok((html.match(/data-mode="(light|dark|auto)"/g) || []).length >= 3);
-  assert.ok(fs.readFileSync(path.join(root, "assets/theme.js"), "utf8").includes("localStorage.setItem(KEY"));
+  assert.ok((html.match(/data-theme-mode="(light|dark|auto)"/g) || []).length >= 3);
+  assert.ok(fs.readFileSync(path.join(root, "assets/theme.js"), "utf8").includes("localStorage.setItem('theme'"));
+});
+ok("symbol controls (door and top bar), defaults on, versioned keys, no external requests", () => {
+  const ctl = fs.readFileSync(path.join(root, "assets/controls.js"), "utf8");
+  for (const k of ["sound", "motion", "fx", "quiet"])
+    assert.equal((html.match(new RegExp(`data-ctl="${k}"[^>]*aria-pressed="${k === "quiet" ? "false" : "true"}"`, "g")) || []).length, 2, `${k}: one on the door, one in the top bar`);
+  assert.ok(/get\("sound"\) !== "off"/.test(ctl) && /get\("fx"\) !== "off"/.test(ctl) && ctl.includes('"garage2"'));
+  assert.ok(!/data-sound-switch|class="snd"/.test(html));
+  const external = [];
+  for (const f of ["index.html", ...fs.readdirSync(path.join(root, "assets")).filter((x) => /\.(js|css)$/.test(x)).map((x) => "assets/" + x)]) {
+    const t = fs.readFileSync(path.join(root, f), "utf8");
+    if (f === "assets/data.js") continue;                                   // outbound project links are data, not requests
+    for (const m of t.matchAll(/(?:src|href)="(https?:\/\/[^"]+)"/g)) if (!/rel="(canonical)"/.test(m[0]) && !/^https:\/\/(github\.com|dhairyab0069\.github\.io)/.test(m[1])) external.push(f + " " + m[1]);
+    for (const m of t.matchAll(/url\(\s*["']?https?:|@import\s+["']?https?:|fetch\(\s*["']https?:/g)) external.push(f + " " + m[0]);
+  }
+  assert.deepEqual(external, []);
 });
 console.log(`${n} checks passed`);

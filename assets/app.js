@@ -1,9 +1,12 @@
 /* The garage: draws everything from window.GARAGE and runs the door, the lights, the dust, the sparks,
-   the drawers and the details sheet. Sounds come from window.Sfx (assets/sound.js) and do nothing until switched on. */
+   the drawers and the details sheet. Sounds come from window.Sfx (assets/sound.js); the Motion and Effects switches
+   (assets/controls.js, window.GCTL) gate every loop and decoration here. */
 (function () {
   "use strict";
   var G = window.GARAGE, Sfx = window.Sfx || { play: function () {} };
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var CTL = window.GCTL || { state: { motion: true, fx: true } };
+  function motion() { return CTL.state.motion; }       // Motion control (off for reduced motion too)
+  function fxOn() { return CTL.state.fx; }             // Effects control
   var $ = function (s) { return document.querySelector(s); };
   var NS = "http://www.w3.org/2000/svg";
 
@@ -150,8 +153,8 @@
 
   /* ---------- dust in the light ---------- */
   var beam = $("#beam");
-  if (!reduce) {
-    for (var i = 0; i < 38; i++) {
+  {
+    for (var i = 0; i < 38; i++) {                     // always built; the Motion and Effects switches show or hide them from CSS
       var m = el("i", "mote");
       m.style.left = (28 + Math.random() * 44) + "%"; m.style.top = (Math.random() * 30) + "px";
       m.style.setProperty("--s", (1.5 + Math.random() * 3) + "px"); m.style.setProperty("--d", (10 + Math.random() * 14) + "s");
@@ -179,6 +182,7 @@
     sparkW = parseFloat(cs.getPropertyValue("--spark-w")) || 2;
   }
   readSparkColours(); addEventListener("themechange", readSparkColours);
+  addEventListener("ctlchange", function () { if (!motion() || !fxOn()) parts = []; });       // switched off mid-spray: the loop ends on its next frame
   function frame(now) {
     var dt = Math.min((now - last) / 1000, 0.05); last = now;
     cx.clearRect(0, 0, innerWidth, innerHeight);
@@ -193,28 +197,29 @@
   }
   $("#sign").addEventListener("click", function (e) {
     var r = e.currentTarget.getBoundingClientRect();
-    if (!reduce) spark(r.left + r.width / 2, r.top + r.height * 0.55, 70);
+    if (motion() && fxOn()) spark(r.left + r.width / 2, r.top + r.height * 0.55, 70);
     Sfx.play("spark");
   });
 
   /* ---------- the door and the lights ---------- */
   var door = $("#door"), dark = $("#dark"), seen = false;
-  try { seen = sessionStorage.getItem("garage-door") === "1"; } catch (e) { /* storage blocked */ }
+  try { seen = sessionStorage.getItem("garage2-door") === "1"; } catch (e) { /* storage blocked */ }
   function lightsOn(flicker) {
     document.body.classList.remove("door-closed");
-    if (!flicker || reduce) { dark.style.transition = "none"; dark.style.opacity = "0"; return; }
+    if (!flicker || !motion()) { dark.style.transition = "none"; dark.style.opacity = "0"; return; }
     Sfx.play("lights");
     [[0, 0.55], [90, 1], [200, 0.35], [320, 1], [520, 0.2], [600, 0.8], [760, 0]].forEach(function (s) {
       setTimeout(function () { dark.style.opacity = String(s[1]); }, s[0]);
     });
   }
-  if (location.hash === "#nodoor" || reduce || seen) {
+  if (location.hash === "#nodoor" || matchMedia("(prefers-reduced-motion: reduce)").matches || seen) {
     door.hidden = true; lightsOn(false);
   } else {
     $("#open-door").focus({ preventScroll: true });
     $("#open-door").addEventListener("click", function () {
-      try { sessionStorage.setItem("garage-door", "1"); } catch (e) { /* ignore */ }
+      try { sessionStorage.setItem("garage2-door", "1"); } catch (e) { /* ignore */ }
       Sfx.play("door"); door.classList.add("open"); door.setAttribute("aria-hidden", "true");
+      if (!motion()) { door.hidden = true; lightsOn(false); $("#main").focus({ preventScroll: true }); return; }   // Motion off: the door is simply gone
       setTimeout(function () { lightsOn(true); }, 1500);
       setTimeout(function () { door.hidden = true; $("#main").focus({ preventScroll: true }); }, 2300);
     });

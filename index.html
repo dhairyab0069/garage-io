@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Garage: small tools, experiments and class projects</title>
-<meta name="description" content="Dhairya Bhatia's garage: the small tools, half-finished experiments and class projects that live next to the bigger builds. A pegboard, a tool chest and a locked toolbox, with optional workshop sounds.">
+<meta name="description" content="Dhairya Bhatia's garage: the small tools, half-finished experiments and class projects that live next to the bigger builds. A pegboard, a tool chest and a locked toolbox, with workshop sounds you can mute.">
 <meta name="theme-color" content="#1c1e21">
 <link rel="canonical" href="https://dhairyab0069.github.io/garage-io/">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
@@ -28,6 +28,7 @@
   r.setAttribute('data-theme-mode', m); r.setAttribute('data-theme', t); r.style.colorScheme = t;
 })();
 </script>
+<script src="assets/controls.js"></script>
 <link rel="stylesheet" href="assets/garage.css">
 </head>
 <body class="door-closed">
@@ -59,17 +60,23 @@
     <p class="door-title">The Garage</p>
     <button type="button" id="open-door" class="door-btn">Open the garage <span aria-hidden="true">▲</span></button>
     <div class="door-ctl">
-      <button type="button" class="snd" data-sound-switch aria-pressed="false"><span class="lbl">Sound off</span></button>
+      <div class="sym-group" role="group" aria-label="Sound, motion, effects and quiet">
+        <button type="button" class="sym" id="door-sound" data-ctl="sound" aria-pressed="true" aria-label="Sound on" title="Sound on. Press to turn off."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><g class="on-only"><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a8 8 0 0 1 0 11"/></g><path class="off-only" d="M4 20 20 4"/></svg></button>
+        <button type="button" class="sym" id="door-motion" data-ctl="motion" aria-pressed="true" aria-label="Motion on" title="Motion on. Press to turn off."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="on-only" d="M2.5 9c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0M2.5 15c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0"/><g class="off-only"><path d="M8.5 6.5v11M15.5 6.5v11"/></g></svg></button>
+        <button type="button" class="sym" id="door-fx" data-ctl="fx" aria-pressed="true" aria-label="Effects on" title="Effects on (dust in the light, sparks, hanging tools that swing, the lamp hum). Press to turn off."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.500l1.800 5.100L18 10.400l-5.200 1.800L11 17.300l-1.800-5.100L4 10.400l5.200-1.800z"/><g class="on-only"><path d="M18.500 15.500v4M16.500 17.500h4"/><path d="M19 3.500v2.500M17.750 4.750h2.500"/></g><path class="off-only" d="M4 20 20 4"/></svg></button>
+        <button type="button" class="sym" id="door-quiet" data-ctl="quiet" aria-pressed="false" aria-label="Quiet everything" title="Quiet everything: sound, motion and effects off. Press again to bring them back."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.500"/><path d="M8 12h8"/></svg></button>
+      </div>
       <div class="theme-switch" role="radiogroup" aria-label="Color theme">
-      <button type="button" role="radio" aria-checked="false" data-mode="light" aria-label="Light theme" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></button>
-      <button type="button" role="radio" aria-checked="false" data-mode="dark" aria-label="Dark theme" title="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
-      <button type="button" role="radio" aria-checked="false" data-mode="auto" aria-label="Match system theme" title="Auto (match system)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+      <button type="button" role="radio" aria-checked="false" data-theme-mode="light" aria-label="Light theme" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></button>
+      <button type="button" role="radio" aria-checked="false" data-theme-mode="dark" aria-label="Dark theme" title="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+      <button type="button" role="radio" aria-checked="false" data-theme-mode="auto" aria-label="Match system theme" title="Auto (match system)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
       </div>
     </div>
   </div>
   <div class="door-handle" aria-hidden="true"></div>
 </div>
 <div id="dark" class="dark" aria-hidden="true"></div>
+<div id="ctl-live" class="sr-only" role="status" aria-live="polite"></div>
 <canvas id="sparks" class="sparks" aria-hidden="true"></canvas>
 
 <header class="top">
@@ -77,11 +84,18 @@
   <nav aria-label="Sections">
     <a href="#pegboard">Pegboard</a><a href="#chest">Tool chest</a><a href="#locked">Locked toolbox</a><a href="#logbook">Logbook</a><a href="#shelf">Shelf</a>
   </nav>
-  <button type="button" class="snd" data-sound-switch aria-pressed="false"><span class="lbl">Sound off</span></button>
-  <div class="theme-switch" role="radiogroup" aria-label="Color theme">
-  <button type="button" role="radio" aria-checked="false" data-mode="light" aria-label="Light theme" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></button>
-  <button type="button" role="radio" aria-checked="false" data-mode="dark" aria-label="Dark theme" title="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
-  <button type="button" role="radio" aria-checked="false" data-mode="auto" aria-label="Match system theme" title="Auto (match system)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+  <div class="top-ctl">
+    <div class="sym-group" role="group" aria-label="Sound, motion, effects and quiet">
+        <button type="button" class="sym" id="top-sound" data-ctl="sound" aria-pressed="true" aria-label="Sound on" title="Sound on. Press to turn off."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/><g class="on-only"><path d="M15.5 9a4 4 0 0 1 0 6"/><path d="M18 6.5a8 8 0 0 1 0 11"/></g><path class="off-only" d="M4 20 20 4"/></svg></button>
+        <button type="button" class="sym" id="top-motion" data-ctl="motion" aria-pressed="true" aria-label="Motion on" title="Motion on. Press to turn off."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="on-only" d="M2.5 9c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0M2.5 15c2-2.6 3.5-2.6 5.5 0s3.5 2.6 5.5 0 3.5-2.6 5.5 0"/><g class="off-only"><path d="M8.5 6.5v11M15.5 6.5v11"/></g></svg></button>
+        <button type="button" class="sym" id="top-fx" data-ctl="fx" aria-pressed="true" aria-label="Effects on" title="Effects on (dust in the light, sparks, hanging tools that swing, the lamp hum). Press to turn off."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.500l1.800 5.100L18 10.400l-5.200 1.800L11 17.300l-1.800-5.100L4 10.400l5.200-1.800z"/><g class="on-only"><path d="M18.500 15.500v4M16.500 17.500h4"/><path d="M19 3.500v2.500M17.750 4.750h2.500"/></g><path class="off-only" d="M4 20 20 4"/></svg></button>
+        <button type="button" class="sym" id="top-quiet" data-ctl="quiet" aria-pressed="false" aria-label="Quiet everything" title="Quiet everything: sound, motion and effects off. Press again to bring them back."><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.500"/><path d="M8 12h8"/></svg></button>
+      </div>
+    <div class="theme-switch" role="radiogroup" aria-label="Color theme">
+  <button type="button" role="radio" aria-checked="false" data-theme-mode="light" aria-label="Light theme" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></button>
+  <button type="button" role="radio" aria-checked="false" data-theme-mode="dark" aria-label="Dark theme" title="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+  <button type="button" role="radio" aria-checked="false" data-theme-mode="auto" aria-label="Match system theme" title="Auto (match system)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+  </div>
   </div>
 </header>
 
@@ -136,7 +150,7 @@
 </aside>
 
 <footer>
-  <p>Made by <a href="https://dhairyab0069.github.io/">Dhairya Bhatia</a>. The sounds are synthesized in your browser and are off until you turn them on. No audio files, no trackers, no external requests.</p>
+  <p>Made by <a href="https://dhairyab0069.github.io/">Dhairya Bhatia</a>. The sounds are synthesized in your browser, start on and can be muted with the speaker symbol. No audio files, no trackers, no external requests.</p>
   <p class="tiny">Every drawer and tool is real: the data lives in <code>assets/data.js</code>.</p>
 </footer>
 

@@ -39,6 +39,8 @@
   --spark-core: 255,170,0; --spark-edge: 200,60,0; --spark-w: 2.8;
   color-scheme: light;
 }
+/* no-JS fallback for a dark system: the base set above is already the dark one */
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) { color-scheme: dark; } }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
   /* a daylight workshop: bright concrete, warm wood, the same steel door. Yellow stays a fill colour;
@@ -94,7 +96,6 @@ code { font-family: var(--mono); font-size: .88em; background: var(--code-bg); p
 .door-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #1a1300; }
 .door-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #1a1300; }
 .door-ctl { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem .9rem; margin-top: 1rem; }
-.door .snd { display: block; }
 .door-handle { position: absolute; left: 50%; bottom: 6vh; width: 120px; height: 18px; margin-left: -60px; border-radius: 9px; background: linear-gradient(#e6e8ea, #8d949a); box-shadow: 0 3px 6px rgba(0,0,0,.5); }
 
 /* the lights come on after the door is up */
@@ -109,11 +110,24 @@ body.door-closed .dark { opacity: 1; }
 .top nav { display: flex; gap: .3rem; margin: 0 auto; flex-wrap: wrap; }
 .top nav a { color: var(--muted); text-decoration: none; font: 700 .8rem var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: .3rem .6rem; border-radius: 4px; }
 .top nav a:hover { color: var(--ink); background: var(--hover-bg); }
-@media (max-width: 720px) { .top nav { display: none; } .top .snd { margin-left: auto; } }
-@media (max-width: 480px) { .top { gap: .5rem; padding-inline: .6rem; } .top .back .bk { display: none; } .top .back { font-size: 1.3rem; padding: 0 .3rem; } }
-.snd { font: 700 .78rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--snd-ink); background: var(--snd-bg); border: 2px solid #11131a; min-height: 44px; border-radius: 6px; padding: .45rem .8rem; cursor: pointer; box-shadow: 0 3px 0 #11131a; }
-.snd:active { transform: translateY(2px); box-shadow: 0 1px 0 #11131a; }
-.snd[aria-pressed="true"] { background: var(--yellow); color: #1a1300; }
+@media (max-width: 720px) { .top nav { display: none; } .top .top-ctl { margin-left: auto; } }
+@media (max-width: 480px) { .top { gap: .4rem; padding-inline: .6rem; } .top .top-ctl { gap: .4rem; } .top .back .bk { display: none; } .top .back { font-size: 1.3rem; padding: 0 .3rem; } }
+/* the four symbol controls: Sound, Motion, Effects, Quiet everything (icon-only, 44px; state shown by glyph and fill, not colour alone) */
+.top-ctl { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .5rem .6rem; }
+.sym-group { display: inline-flex; gap: .35rem; align-items: center; flex: none; }
+.sym { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; color: var(--snd-ink); background: var(--snd-bg); border: 2px solid #11131a; border-radius: 6px; box-shadow: 0 3px 0 #11131a; cursor: pointer; transition: transform .12s, background-color .2s, color .2s; }
+html:not(.ctl-ready) .sym { transition: none; }
+.sym svg { width: 24px; height: 24px; }
+.sym:hover { transform: translateY(-1px); }
+.sym:active { transform: translateY(2px); box-shadow: 0 1px 0 #11131a; }
+.sym:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.sym[aria-pressed="true"] { background: var(--yellow); color: #1a1300; }
+.sym[aria-pressed="false"] { opacity: .85; }
+.sym[data-ctl="quiet"][aria-pressed="true"] { background: #11131a; color: #f4ecd6; opacity: 1; }
+.sym .off-only { display: none; }
+.sym[aria-pressed="false"] .on-only { display: none; }
+.sym[aria-pressed="false"] .off-only { display: inline; }
+.sym[data-ctl="quiet"] .on-only, .sym[data-ctl="quiet"] .off-only { display: inline; }
 
 /* theme switch: three icon-only radios (light, dark, auto) */
 .theme-switch{position:relative;display:inline-flex;padding:2px;border:1px solid #11131a;border-radius:999px;background:var(--snd-bg);flex:none}
@@ -257,6 +271,17 @@ h2::after { content: ""; display: block; width: 70px; height: 6px; margin-top: .
 
 footer { max-width: 1120px; margin: 2rem auto 0; padding: 1.6rem 1.1rem 3rem; border-top: 3px solid var(--foot-line); color: var(--muted); font-size: .92rem; }
 .nojs { padding: 1rem; background: var(--yellow); color: #1a1300; }
+
+/* ---------- Effects off: no dust, no sparks (see app.js), no hanging swing, no lamp hum ---------- */
+html[data-fx="off"] .mote, html[data-motion="off"] .mote { display: none; }
+html[data-fx="off"] .lamp { animation: none; }
+html[data-fx="off"] .tool:hover, html[data-fx="off"] .tool:focus-visible { transform: none; }
+html[data-fx="off"] .sparks { display: none; }
+
+/* ---------- Motion off (the Motion button, or the system asks for reduced motion): every animation ends at once and every transition is instant, so the door and the flicker are instant ---------- */
+html[data-motion="off"], html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after {
+  animation-duration: 0s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition: none !important; scroll-behavior: auto !important; }
+html[data-motion="off"] .lamp { animation: none !important; }
 
 /* ---------- reduced motion: no door, no sway, no flicker, no dust ---------- */
 @media (prefers-reduced-motion: reduce) {

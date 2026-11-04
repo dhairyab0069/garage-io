@@ -1,11 +1,12 @@
-/* Garage sounds, off until the Sound switch is pressed. Everything is synthesized with the Web Audio API
+/* Garage sounds, on by default (the Sound symbol mutes them). Browsers keep audio locked until a gesture, so the
+   audio context is created and resumed on the first pointer, key or touch. Everything is synthesized with the Web Audio API
    (noise, a few sine partials for metal, a low motor tone), so there are no audio files and no requests.
    Other scripts call Sfx.play("name"). Nothing plays while the tab is hidden. */
 (function () {
   "use strict";
-  var KEY = "garage-sound", MAX = 90;
-  var on = false, ctx = null, master = null, noise = null, voices = 0, last = {};
-  try { on = localStorage.getItem(KEY) === "1"; } catch (e) { /* storage blocked */ }
+  var MAX = 90;
+  var ctx = null, master = null, noise = null, voices = 0, last = {};
+  function isOn() { return !window.GCTL || window.GCTL.state.sound; }          // the Sound control lives in controls.js (garage2-sound)
 
   function ensure() {
     if (ctx) return true;
@@ -22,7 +23,7 @@
     } catch (e) { ctx = null; return false; }
     return true;
   }
-  function ready() { return on && ctx && ctx.state === "running" && !document.hidden; }
+  function ready() { return isOn() && ctx && ctx.state === "running" && !document.hidden; }
   function gap(k, ms) { var n = performance.now(); if (n - (last[k] || 0) < ms) return true; last[k] = n; return false; }
   function R(a, b) { return a + Math.random() * (b - a); }
 
@@ -115,29 +116,21 @@
     on: function () { clink(0, 2400, 0.05); clink(0.09, 3200, 0.05); }
   };
 
-  function play(name, arg) {
-    if (!ready() || !FX[name]) return;
+  function run(name, arg) {
+    if (!ready()) return;
     if (name === "ratchet" && gap("ratchet", 110)) return;
     try { FX[name](arg); } catch (e) { /* audio must never break the page */ }
   }
-  function wake() { if (on && ensure() && ctx.state === "suspended") ctx.resume().catch(function () {}); }
-
-  var buttons = [];
-  function paint() { buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(on)); b.querySelector(".lbl").textContent = on ? "Sound on" : "Sound off"; }); }
-  function save() { try { localStorage.setItem(KEY, on ? "1" : "0"); } catch (e) { /* ignore */ } }
-  function toggle() {
-    if (on) { play("click"); on = false; save(); paint(); return; }
-    if (!ensure()) { buttons.forEach(function (b) { b.querySelector(".lbl").textContent = "No audio here"; }); return; }
-    on = true; save(); paint();
-    ctx.resume().then(function () { play("on"); }).catch(function () {});
+  function play(name, arg) {
+    if (!isOn() || !FX[name] || document.hidden || !ctx) return;                  // locked until the first gesture
+    if (ctx.state === "suspended") ctx.resume().then(function () { run(name, arg); }).catch(function () {});
+    else run(name, arg);
   }
-  document.addEventListener("DOMContentLoaded", function () {
-    buttons = [].slice.call(document.querySelectorAll("[data-sound-switch]"));
-    buttons.forEach(function (b) { b.addEventListener("click", function (e) { e.stopPropagation(); toggle(); }); });
-    paint();
-  });
-  if (on) ["pointerdown", "keydown"].forEach(function (n) { addEventListener(n, wake, { once: true, capture: true }); });
+  function wake() { if (isOn() && ensure() && ctx.state === "suspended") ctx.resume().catch(function () {}); }
+  /* the first pointer, key or touch unlocks audio; turning Sound on from its button is a gesture too */
+  ["pointerdown", "keydown", "touchstart"].forEach(function (n) { addEventListener(n, wake, { capture: true, passive: true }); });
+  addEventListener("ctlchange", wake);
   document.addEventListener("visibilitychange", function () { if (!document.hidden) wake(); });
 
-  window.Sfx = { play: play, get on() { return on; } };
+  window.Sfx = { play: play, get on() { return isOn(); } };
 })();

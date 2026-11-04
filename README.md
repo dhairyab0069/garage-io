@@ -17,9 +17,18 @@ Add a project by editing `assets/data.js`; nothing else needs to change.
 
 ## Sound
 
-The Sound switch (on the door and in the top bar, off by default, remembered in `localStorage`) turns on workshop sounds made live
+Workshop sounds are on by default and the Sound symbol (a speaker, on the door and in the top bar) mutes them. They are made live
 with the Web Audio API: the door's motor and rattling slats, a fluorescent tube catching, a tool lifted off its hook, a drawer on
 its runners, a padlock rattled, welding sparks. There are no audio files. Nothing plays while the tab is hidden.
+
+## Controls and defaults
+
+Four icon buttons, on the door and in the top bar: Sound (speaker), Motion (waves), Effects (sparkle) and Quiet everything
+(circle with a bar). Sound, Motion and Effects all start on; Motion starts off only if your system asks for reduced motion. Quiet
+everything turns all three off and, pressed again, brings back exactly what was on before. Motion off makes the roller door and the
+flicker instant and stops every loop; Effects covers the dust, the welding sparks, the hover swing and the lamp hum. Browsers keep
+audio locked until the first click, key press or touch, so sound starts from then. Choices are kept on this device under
+`garage2-sound`, `garage2-motion` and `garage2-fx`. See `DESIGN.md` for the full design, the data model and the privacy rule.
 
 ## Motion and accessibility
 
@@ -51,5 +60,6 @@ node tests/data.test.js       # data checks, including that nothing private is l
 | `assets/data.js` | every project the garage shows |
 | `assets/app.js` | drawing, the door, lights, dust, sparks, the sheet |
 | `assets/sound.js` | the synthesized sounds |
+| `assets/controls.js` | the four symbol controls and the shared state (`window.GCTL`) |
 | `assets/theme.js` | light / dark / auto switch, shared across the owner's sites |
 | `assets/garage.css` | styles |
