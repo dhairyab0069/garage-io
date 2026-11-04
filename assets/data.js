@@ -26,8 +26,8 @@ window.GARAGE = {
       tags: ["Python", "LLMs", "Prompt optimization", "DSPy"],
       links: [{ label: "Repo", href: "https://github.com/dhairyab0069/miprovsrmipro" }] },
     { id: "manifold", name: "Manifold search", icon: "compass", status: "Research project", year: 2026,
-      summary: "Fast shortest paths over curved surfaces. A class project turned personal research.",
-      detail: "It began as the CS 5800 algorithms project: a two-level search over sphere and torus meshes that routes across a coarse graph of patches, then refines, and is compared with Dijkstra and A* for speed and accuracy. It is now my own research project. Planned next: more surfaces and real meshes, GPU-scale runs, and learned partitions and heuristics.",
+      summary: "Fast shortest paths over curved surfaces.",
+      detail: "A two-level search over sphere and torus meshes that routes across a coarse graph of patches, then refines, and is compared with Dijkstra and A* for speed and accuracy. A CS 5800 algorithms project and my own research. Planned next: more surfaces and real meshes, GPU-scale runs, and learned partitions and heuristics.",
       tags: ["Python", "Algorithms", "Geometry", "Research"],
       links: [{ label: "Repo", href: "https://github.com/dhairyab0069/manifold-search" }] },
     { id: "depdeck", name: "DepDeck", icon: "box", status: "Works, build from source", year: 2026,
@@ -42,7 +42,7 @@ window.GARAGE = {
       links: [{ label: "Repo", href: "https://github.com/dhairyab0069/desktop-shell-mac" }, { label: "Try the demo", href: "https://dhairyab0069.github.io/macos-tools-io/" }] },
     { id: "web-design-skill", name: "Web design skill", icon: "wand", status: "In daily use", year: 2026,
       summary: "A Claude Code skill that builds animated, sound-rich project pages from a kit of themes, and remembers every customisation.",
-      detail: "A skill for Claude Code that I use to make my project pages. It holds a small kit (design tokens, a single animation loop, page transitions, a synthesized sound engine with six palettes, symbol controls for sound, motion and effects, and one light, dark and auto setting shared by every page), a registry of twelve themes and my past projects, a scaffold that builds a new page from a theme and a project type, and an audit that checks it. Every page it makes has sound, motion and transitions, even a plain one, and it writes down the design decisions as it goes. It lives on my machine for now and is not published.",
+      detail: "A skill for Claude Code that I use to make my project pages. It holds a small kit (design tokens, a single animation loop, page transitions, a synthesized sound engine with six palettes, symbol controls for sound, motion and effects, and one light, dark and auto setting shared by every page), a registry of twelve themes and my past projects, a scaffold that builds a new page from a theme and a project type, and an audit that checks it. Every page it makes has sound, motion and transitions, even a plain one, and it writes down the design decisions as it goes. It is not published.",
       tags: ["Claude Code", "JavaScript", "Web Audio", "Design systems"],
       links: [] },
     { id: "murmur", name: "Murmur design language", icon: "swatch", status: "In daily use", year: 2026,
@@ -60,13 +60,13 @@ window.GARAGE = {
     { id: "d-coursify", label: "Year-long project", items: [
       { name: "Coursify AI", note: "A Flask web app that helps teachers generate course content. Team project, UBC capstone, run in Docker.", href: "https://github.com/dhairyab0069/Coursify-AI" } ] },
     { id: "d-atlas", label: "Human-computer interaction", items: [
-      { name: "Atlas (Java)", note: "The original gym progress tracker, made by a team of five for COSC 341 at UBC Okanagan.", href: "https://github.com/dhairyab0069/Atlas" } ] },
+      { name: "Atlas (Java)", note: "A gym progress tracker, made by a team of five for COSC 341 at UBC Okanagan.", href: "https://github.com/dhairyab0069/Atlas" } ] },
     { id: "d-web", label: "Web programming", items: [
       { name: "Fighting-game discussion forum", note: "A forum site for fighting-game fans, in PHP, for COSC 360.", href: "https://github.com/dhairyab0069/StreetFighter_DiscussionForum" } ] },
     { id: "d-se", label: "Software engineering", items: [
       { name: "Q-Clicker", note: "A classroom-response web app built with a structured process, design patterns and tests, for COSC 310.", href: "https://github.com/dhairyab0069/Q-Clicker" } ] },
     { id: "d-pdp", label: "Programming design paradigms", items: [
-      { name: "Calendar", note: "A multi-calendar scheduler in Java, built with a partner for CS 5010 (it began as the team repo hw4-team-top). Now being ported to Rust, and it has its own page on the shelf.", href: "https://dhairyab0069.github.io/calendar-app-io/" } ] }
+      { name: "Calendar", note: "A multi-calendar scheduler in Java, built with a partner for CS 5010. It has its own page on the shelf.", href: "https://dhairyab0069.github.io/calendar-app-io/" } ] }
   ],
   logbook: [
     { id: "calendar", title: "Calendar", href: "https://dhairyab0069.github.io/calendar-app-io/",
@@ -112,9 +112,9 @@ window.GARAGE = {
     { name: "Himawari", note: "A live wallpaper for macOS that turns into your music.", href: "https://dhairyab0069.github.io/himawari-io/" },
     { name: "Abiogenesis", note: "A Rust simulation of how life could start, from soup to self-copying RNA.", href: "https://dhairyab0069.github.io/abiogenesis-io/" },
     { name: "Calendar", note: "A multi-calendar scheduler, on a 1980s office desktop.", href: "https://dhairyab0069.github.io/calendar-app-io/" },
-    { name: "Atlas-Mobile", note: "A gym tracker rewritten natively for iOS and Android from one shared spec.", href: "https://dhairyab0069.github.io/atlas-mobile-io/" },
+    { name: "Atlas-Mobile", note: "A gym tracker for iOS and Android, native on each, from one shared spec.", href: "https://dhairyab0069.github.io/atlas-mobile-io/" },
     { name: "FocusLock", note: "A focus timer that pauses when you wander. Try the simulator; the source is private.", href: "https://dhairyab0069.github.io/focuslock-io/" },
-    { name: "LucasCheck", note: "A mock store with a working miniature, rebuilt for the web from a database course.", href: "https://dhairyab0069.github.io/lucascheck-io/" },
+    { name: "LucasCheck", note: "A mock store with a working miniature, from a database course.", href: "https://dhairyab0069.github.io/lucascheck-io/" },
     { name: "ML projects", note: "ECG diagnosis and NYC taxi prediction, as a map with a hospital and a taxi stand.", href: "https://dhairyab0069.github.io/ml-projects-io/" },
     { name: "BIOT 6900 report", note: "Alzheimer's disease from genes to drug targets, written up like a medical report.", href: "https://dhairyab0069.github.io/biot6900-io/" }
   ]
