@@ -3,7 +3,7 @@
 Keep this file current: every change gets a line under "Decisions and trade-offs".
 
 ## Purpose
-A project page for the small tools, half-finished experiments and class projects that live next to Dhairya Bhatia's bigger builds, for anyone following the work (classmates, reviewers, curious visitors). It answers "what else has he made?" in a way that is fun to browse but quick to scan. Project type: portfolio / project index.
+A project page for the small tools, experiments and class projects that live next to Dhairya Bhatia's bigger builds, for anyone following the work (classmates, reviewers, curious visitors). It answers "what else has he made?" in a way that is fun to browse but quick to scan. Project type: portfolio / project index.
 
 ## Theme choice and why
 Theme: a workshop. You arrive at a closed roller door; opening it flickers a tube light on over a concrete wall, a pegboard of hung tools, a steel tool chest, a locked toolbox, a logbook and a shelf of bigger builds. Chosen because the content is a pile of small things, and "things hung on a wall and filed in drawers" is the honest way to show a pile: each object is a real button that opens a real sheet. Dark is the original lit-up workshop; light is a daylight workshop (bright concrete, warm wood, the same steel door), designed rather than inverted. Type is a system stack only: Impact-style stencil for display, system sans for body, system mono for labels. No web fonts.
@@ -79,7 +79,7 @@ Private or under-review projects are never linked, named or described beyond wha
 - Keyboard: skip link, every tool, drawer and lock is a real button with `aria-expanded` where it opens something, Esc puts the tool back, closed trays are `inert`, the theme group uses arrow keys, focus moves to the door button and then to the main content.
 - Reduced motion: the system setting starts Motion off, the door is skipped; the Motion button explains why it cannot be turned on.
 - Control changes are announced through a polite live region. `<noscript>` explains that the garage needs JavaScript and links to GitHub.
-- Honest labelling: statuses ("Work in progress") are shown as they are.
+- Labelling: each tool carries a kind ("Tool", "macOS app"), not a development status; project history lives in the logbook and the repos.
 
 ## No external requests
 No web fonts, CDN, analytics or remote images (the only `https` links are outbound project links the visitor chooses to follow, and the canonical and Open Graph tags).
