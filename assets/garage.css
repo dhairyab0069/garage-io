@@ -11,7 +11,7 @@
   --grid-h: rgba(0,0,0,.28); --grid-v: rgba(0,0,0,.2);
   --top-bg: rgba(23, 24, 26, .88); --hover-bg: rgba(255,255,255,.08); --code-bg: rgba(255,255,255,.08);
   --snd-bg: #33383d; --snd-ink: #ece7d8; --foot-line: #101214; --card-shadow: rgba(0,0,0,.5);
-  --box-ink: #ece7d8; --box-muted: #a8a699;
+  --box-ink: #ece7d8; --box-muted: #bab8ab;
   --lamp-glow: 0 0 30px 6px rgba(255, 241, 196, .55), 0 0 90px 24px rgba(255, 241, 196, .2);
   --beam-top: rgba(255, 241, 196, .22); --mote: rgba(255, 244, 214, .8);
   --dark-vignette: radial-gradient(ellipse at 50% -10%, rgba(0,0,0,0) 8%, rgba(0,0,0,.88) 72%);
