@@ -30,6 +30,16 @@ window.GARAGE = {
       detail: "It began as the CS 5800 algorithms project: a two-level search over sphere and torus meshes that routes across a coarse graph of patches, then refines, and is compared with Dijkstra and A* for speed and accuracy. It is now my own research project. Planned next: more surfaces and real meshes, GPU-scale runs, and learned partitions and heuristics.",
       tags: ["Python", "Algorithms", "Geometry", "Research"],
       links: [{ label: "Repo", href: "https://github.com/dhairyab0069/manifold-search" }] },
+    { id: "depdeck", name: "DepDeck", icon: "box", status: "Works, build from source", year: 2026,
+      summary: "A menu bar app that keeps your Homebrew, npm and cargo packages up to date.",
+      detail: "A macOS menu bar app for managing command-line tools and dependencies. A popover with five tabs (Installed, Updates, Issues, Search, Settings) lists packages from Homebrew, npm and cargo, updates or uninstalls them one by one or all at once, and shows a badge when something is out of date. There is no release yet, so you build it from source. The demo page recreates it in the browser.",
+      tags: ["Swift", "SwiftUI", "macOS", "Homebrew", "npm", "cargo"],
+      links: [{ label: "Repo", href: "https://github.com/dhairyab0069/DepDeck" }, { label: "Try the demo", href: "https://dhairyab0069.github.io/macos-tools-io/" }] },
+    { id: "desktop-shell", name: "Desktop Shell", icon: "taskbar", status: "Works, build from source", year: 2026,
+      summary: "A Windows-XP-style taskbar and Start menu, with iOS-style folders and widgets, for macOS.",
+      detail: "A macOS desktop shell: an XP-style taskbar with a Start menu, iOS-style desktop folders, Aero-style widgets you can dock to any edge, a window tiling rule that respects the reserved strips, and a desktopctl command line. There is no release yet, so you build it from source. The demo page recreates it in the browser.",
+      tags: ["Swift", "macOS", "Window management", "Desktop"],
+      links: [{ label: "Repo", href: "https://github.com/dhairyab0069/desktop-shell-mac" }, { label: "Try the demo", href: "https://dhairyab0069.github.io/macos-tools-io/" }] },
     { id: "nextcube-terminal", name: "nextcube terminal", icon: "monitor", status: "Done", year: 2026,
       summary: "A pretend NeXTSTEP Unix shell with a five-flag CTF, in the browser.",
       detail: "About 100 commands on a pretend filesystem, with pipes, redirects, scripts and a hidden kernel dungeon, plus a five-flag reverse-engineering CTF. Plain HTML and ES modules, no build step. It is embedded in the portfolio's Workbench.",
@@ -96,7 +106,6 @@ window.GARAGE = {
     { name: "FocusLock", note: "A focus timer that pauses when you wander. Try the simulator; the source is private.", href: "https://dhairyab0069.github.io/focuslock-io/" },
     { name: "LucasCheck", note: "A mock store with a working miniature, rebuilt for the web from a database course.", href: "https://dhairyab0069.github.io/lucascheck-io/" },
     { name: "ML projects", note: "ECG diagnosis and NYC taxi prediction, as a map with a hospital and a taxi stand.", href: "https://dhairyab0069.github.io/ml-projects-io/" },
-    { name: "macOS tools", note: "DepDeck and a Windows-XP-style desktop shell, recreated in the page.", href: "https://dhairyab0069.github.io/macos-tools-io/" },
     { name: "BIOT 6900 report", note: "Alzheimer's disease from genes to drug targets, written up like a medical report.", href: "https://dhairyab0069.github.io/biot6900-io/" }
   ]
 };
