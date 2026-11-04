@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Garage: small tools, experiments and class projects</title>
+<meta name="description" content="Dhairya Bhatia's garage: the small tools, half-finished experiments and class projects that live next to the bigger builds. A pegboard, a tool chest and a locked toolbox, with optional workshop sounds.">
+<meta name="theme-color" content="#1c1e21">
+<link rel="canonical" href="https://dhairyab0069.github.io/garage-io/">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Garage">
+<meta property="og:description" content="Small tools, experiments and class projects, hung on a pegboard.">
+<meta property="og:url" content="https://dhairyab0069.github.io/garage-io/">
+<meta property="og:image" content="https://dhairyab0069.github.io/garage-io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A dark workshop wall with a pegboard and the words The Garage">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="assets/garage.css">
+</head>
+<body class="door-closed">
+
+<!-- icons: one <symbol> per tool, drawn as outlines so each can be painted on the pegboard -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="calipers" viewBox="0 0 64 64"><path d="M6 28h52v10H6z"/><path d="M6 28V10h9v18"/><path d="M34 28V14h9v14"/><path d="M14 38v5M22 38v8M30 38v5M38 38v8M46 38v5"/></symbol>
+    <symbol id="brush" viewBox="0 0 64 64"><path d="M56 8 36 28"/><path d="m40 24 8 8-6 6-8-8z"/><path d="M34 36c-9-2-15 3-15 11-5 1-8 4-9 9 9 3 21 1 25-9 1-4 0-8-1-11z"/></symbol>
+    <symbol id="funnel" viewBox="0 0 64 64"><path d="M6 10h52L38 32v16l-12 8V32z"/><path d="M14 18h36"/></symbol>
+    <symbol id="wrench" viewBox="0 0 64 64"><path d="M46 6a14 14 0 0 0-12 20L8 52a6 6 0 0 0 8 8l26-26a14 14 0 0 0 20-12l-10 8-8-2-2-8 8-10a14 14 0 0 0-4-4z"/><circle cx="13" cy="55" r="1.5"/></symbol>
+    <symbol id="compass" viewBox="0 0 64 64"><circle cx="32" cy="10" r="5"/><path d="M32 15 14 58M32 15l18 43"/><path d="M22 38h20"/><path d="M14 58l-2 4M50 58l2 4"/></symbol>
+    <symbol id="monitor" viewBox="0 0 64 64"><path d="M6 8h52v36H6z"/><path d="M24 56h16M32 44v12"/><path d="m14 18 9 7-9 7M28 34h14"/></symbol>
+    <symbol id="padlock" viewBox="0 0 64 64"><path d="M14 28h36v28H14z"/><path d="M22 28v-8a10 10 0 0 1 20 0v8"/><path d="M32 38v10"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to the garage</a>
+
+<!-- the roller door: closed on arrival, lifts when you open it -->
+<div id="door" class="door" role="dialog" aria-label="The garage door is closed">
+  <div class="door-slats" aria-hidden="true"></div>
+  <div class="door-label">
+    <p class="door-kicker">Dhairya Bhatia</p>
+    <p class="door-title">The Garage</p>
+    <button type="button" id="open-door" class="door-btn">Open the garage <span aria-hidden="true">▲</span></button>
+    <button type="button" class="snd" data-sound-switch aria-pressed="false"><span class="lbl">Sound off</span></button>
+  </div>
+  <div class="door-handle" aria-hidden="true"></div>
+</div>
+<div id="dark" class="dark" aria-hidden="true"></div>
+<canvas id="sparks" class="sparks" aria-hidden="true"></canvas>
+
+<header class="top">
+  <a class="back" href="https://dhairyab0069.github.io/">← dhairyab0069</a>
+  <nav aria-label="Sections">
+    <a href="#pegboard">Pegboard</a><a href="#chest">Tool chest</a><a href="#locked">Locked toolbox</a><a href="#shelf">Shelf</a>
+  </nav>
+  <button type="button" class="snd" data-sound-switch aria-pressed="false"><span class="lbl">Sound off</span></button>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero" aria-labelledby="h-hero">
+    <h1 class="sr-only" id="h-hero">The Garage</h1>
+    <div class="lamp" aria-hidden="true"><i></i></div>
+    <div class="beam" aria-hidden="true" id="beam"></div>
+    <button type="button" class="sign" id="sign" aria-label="The Garage. Press for welding sparks.">
+      <span class="sign-small">Dhairya's</span>
+      <span class="sign-big" aria-hidden="true">THE GARAGE</span>
+      <span class="sign-small">tools · experiments · class projects</span>
+    </button>
+    <p class="lede">Not everything I make is a big project. This is where the small tools, the half-finished experiments and the class projects live, next to the bigger builds. Take something off the wall to see what it is.</p>
+  </section>
+
+  <section id="pegboard" aria-labelledby="h-peg">
+    <h2 id="h-peg">The pegboard</h2>
+    <p class="lead">Small tools and experiments, public on GitHub. Press one to take it off its hook.</p>
+    <div class="pegboard" id="tools"></div>
+  </section>
+
+  <section id="chest" aria-labelledby="h-chest">
+    <h2 id="h-chest">The tool chest</h2>
+    <p class="lead">Class projects, filed by drawer. Pull one open.</p>
+    <div class="chest" id="drawers"></div>
+  </section>
+
+  <section id="locked" aria-labelledby="h-locked">
+    <h2 id="h-locked">The locked toolbox</h2>
+    <p class="lead">Private projects. I describe them here but the code is not public, so there are no links.</p>
+    <div class="lockboxes" id="lockboxes"></div>
+  </section>
+
+  <section id="shelf" aria-labelledby="h-shelf">
+    <h2 id="h-shelf">The shelf</h2>
+    <p class="lead">The bigger builds, each with a page of its own.</p>
+    <div class="shelf" id="builds"></div>
+  </section>
+</main>
+
+<aside id="sheet" class="sheet" aria-label="Details" aria-hidden="true" inert>
+  <div class="sheet-clip" aria-hidden="true"></div>
+  <button type="button" class="sheet-close" id="sheet-close" aria-label="Put it back on the wall">Put it back ✕</button>
+  <div class="sheet-body" id="sheet-body"></div>
+</aside>
+
+<footer>
+  <p>Made by <a href="https://dhairyab0069.github.io/">Dhairya Bhatia</a>. The sounds are synthesized in your browser and are off until you turn them on. No audio files, no trackers, no external requests.</p>
+  <p class="tiny">Every drawer and tool is real: the data lives in <code>assets/data.js</code>.</p>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/sound.js"></script>
+<script src="assets/app.js"></script>
+<noscript><p class="nojs">The garage needs JavaScript to hang its tools. The projects are on <a href="https://github.com/dhairyab0069">GitHub</a>.</p></noscript>
+</body>
+</html>
