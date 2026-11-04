@@ -5,11 +5,6 @@
    - builds:  bigger projects that have their own page, on the shelf above the bench */
 window.GARAGE = {
   tools: [
-    { id: "step-extracter-cad", name: "CAD feature extractor", icon: "calipers", status: "Work in progress", year: 2025,
-      summary: "Measures a CAD model: its volumes, areas, bounding box and features.",
-      detail: "A Python tool that reads STEP, IGES and STL files with pythonOCC and pulls out geometric features and dimensions, aiming at automated analysis for engineering and manufacturing checks.",
-      tags: ["Python", "pythonOCC", "CAD", "Geometry"],
-      links: [{ label: "Repo", href: "https://github.com/dhairyab0069/step-extracter-CAD" }] },
     { id: "cv-tool", name: "Interactive image editor", icon: "brush", status: "Work in progress", year: 2023,
       summary: "MATLAB pipelines, PyTorch models and a chat interface, behind one web page.",
       detail: "An image editing platform that joins classic MATLAB image processing, PyTorch deep learning models and a GPT-powered conversational interface with a web front end, so you can ask for an edit in plain words.",
@@ -20,11 +15,6 @@ window.GARAGE = {
       detail: "A working-title system that extracts, processes and searches data from structured and unstructured sources, aimed at industrial and technical documents: embeddings, retrieval and scalable processing.",
       tags: ["Python", "Embeddings", "Retrieval", "Documents"],
       links: [{ label: "Repo", href: "https://github.com/dhairyab0069/oblivion" }] },
-    { id: "r-mipro", name: "r-MIPRO", icon: "wrench", status: "Work in progress", year: 2025,
-      summary: "Spends a limited prompt-tuning budget where it helps most.",
-      detail: "Resource-adaptive prompt optimization for multi-agent LLM systems. The question: how should optimization trials be shared out across modules or agents when cost, latency and budget are limited?",
-      tags: ["Python", "LLMs", "Prompt optimization", "DSPy"],
-      links: [{ label: "Repo", href: "https://github.com/dhairyab0069/miprovsrmipro" }] },
     { id: "manifold", name: "Manifold search", icon: "compass", status: "Research project", year: 2026,
       summary: "Fast shortest paths over curved surfaces. A class project turned personal research.",
       detail: "It began as the CS 5800 algorithms project: a two-level search over sphere and torus meshes that routes across a coarse graph of patches, then refines, and is compared with Dijkstra and A* for speed and accuracy. It is now my own research project. Planned next: more surfaces and real meshes, GPU-scale runs, and learned partitions and heuristics.",
