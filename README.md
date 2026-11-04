@@ -27,6 +27,15 @@ The door, the swing of a hung tool, the flicker and the dust are skipped when th
 real button or link with a focus ring, drawers and locks expose `aria-expanded`, and Esc puts the tool back. Add `#nodoor` to the
 URL to skip the door.
 
+## Light, dark and auto
+
+The page follows one setting shared across all of dhairyab0069.github.io: `localStorage.theme` is `light`, `dark` or `auto`
+(absent means auto, following the system). The three-way switch sits on the door and in the top bar; a change made on any other
+page or tab applies here live. Dark is the original lit-up workshop. Light is a daylight workshop: bright concrete, warm wood
+pegboard, the same steel door, and a gentle daylight in place of the dark vignette, so the lights still flicker on and end bright.
+The welding sparks re-read their colours from the theme tokens. An inline script in `<head>` sets the theme before first paint; the
+change plays a short circle reveal and a soft sound cue (when sound is on), and is instant under reduced motion. Code: `assets/theme.js`.
+
 ## Run and test
 
 ```bash
@@ -42,4 +51,5 @@ node tests/data.test.js       # data checks, including that nothing private is l
 | `assets/data.js` | every project the garage shows |
 | `assets/app.js` | drawing, the door, lights, dust, sparks, the sheet |
 | `assets/sound.js` | the synthesized sounds |
+| `assets/theme.js` | light / dark / auto switch, shared across the owner's sites |
 | `assets/garage.css` | styles |

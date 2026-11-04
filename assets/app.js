@@ -171,7 +171,14 @@
     }
     if (!running) { running = true; last = performance.now(); requestAnimationFrame(frame); }
   }
-  var last = 0;
+  var last = 0, core = [255, 240, 40], edge = [255, 120, 0], sparkW = 2;
+  /* sparks re-read their colours from the theme tokens, so daylight gets deeper, thicker ones */
+  function readSparkColours() {
+    var cs = getComputedStyle(document.documentElement), n = function (v, d) { var a = v.split(",").map(Number); return a.length === 3 && a.every(isFinite) ? a : d; };
+    core = n(cs.getPropertyValue("--spark-core"), core); edge = n(cs.getPropertyValue("--spark-edge"), edge);
+    sparkW = parseFloat(cs.getPropertyValue("--spark-w")) || 2;
+  }
+  readSparkColours(); addEventListener("themechange", readSparkColours);
   function frame(now) {
     var dt = Math.min((now - last) / 1000, 0.05); last = now;
     cx.clearRect(0, 0, innerWidth, innerHeight);
@@ -179,8 +186,8 @@
     parts.forEach(function (p) {
       p.vy += 18 * dt; p.x += p.vx; p.y += p.vy;
       var t = 1 - p.age / p.life;
-      cx.strokeStyle = "rgba(255," + Math.round(120 + 120 * t) + "," + Math.round(40 * t) + "," + t + ")";
-      cx.lineWidth = 2 * t + 0.5; cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(p.x - p.vx * 1.4, p.y - p.vy * 1.4); cx.stroke();
+      cx.strokeStyle = "rgba(" + Math.round(edge[0] + (core[0] - edge[0]) * t) + "," + Math.round(edge[1] + (core[1] - edge[1]) * t) + "," + Math.round(edge[2] + (core[2] - edge[2]) * t) + "," + t + ")";
+      cx.lineWidth = sparkW * t + 0.5; cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(p.x - p.vx * 1.4, p.y - p.vy * 1.4); cx.stroke();
     });
     if (parts.length) requestAnimationFrame(frame); else { running = false; cx.clearRect(0, 0, innerWidth, innerHeight); }
   }

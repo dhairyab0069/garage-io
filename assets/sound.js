@@ -110,6 +110,8 @@
     page: function () { hiss({ type: "bandpass", f: 1300, to: 4800, q: 0.5, dur: 0.15, gain: 0.07, attack: 0.025 }); for (var i = 0; i < 8; i++) hiss({ at: R(0.02, 0.16), type: "highpass", f: R(2600, 7000), dur: 0.01, gain: 0.03, attack: 0.001 }); },
     click: function () { thump(0, 0.05, 150); clink(0.005, 2200, 0.02); },            // a heavy switch
     ratchet: function () { hiss({ type: "highpass", f: 4500, dur: 0.012, gain: 0.03, attack: 0.001 }); tone({ f: R(1700, 2100), dur: 0.012, gain: 0.02, attack: 0.001 }); },
+    themeLight: function () { tone({ f: 1800, dur: 0.25, gain: 0.02, attack: 0.002 }); clink(0.02, 2600, 0.025); },    // a switch and a bright ping
+    themeDark: function () { thump(0, 0.04, 140); tone({ f: 420, to: 300, dur: 0.22, gain: 0.015, attack: 0.004 }); },
     on: function () { clink(0, 2400, 0.05); clink(0.09, 3200, 0.05); }
   };
 

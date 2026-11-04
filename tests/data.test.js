@@ -27,7 +27,7 @@ const PRIVATE = ["ml-course", "MotionBlind", "motiondoctor", "egoexo360", "Polym
 ok("every tool has the fields the sheet shows", () => {
   for (const t of G.tools) {
     for (const k of ["id", "name", "icon", "status", "summary", "detail"]) assert.ok(t[k], `${t.id || "?"} lacks ${k}`);
-    assert.ok(Number.isInteger(t.year) && t.tags.length && t.links.length, t.id);
+    assert.ok(Number.isInteger(t.year) && t.tags.length && Array.isArray(t.links), t.id);   // a tool that is not published has no links
   }
 });
 ok("ids are unique", () => {
@@ -79,5 +79,12 @@ ok("private names stay out of the page and the data, except the locked toolbox e
 });
 ok("every script and stylesheet the page loads exists", () => {
   for (const m of html.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)) assert.ok(fs.existsSync(path.join(root, m[1])), m[1]);
+});
+ok("shared light/dark/auto theme: key, early script before the stylesheet, radiogroup", () => {
+  const early = html.indexOf("localStorage.getItem('theme')");
+  assert.ok(early > 0 && early < html.indexOf('rel="stylesheet"'));
+  assert.ok(html.includes('role="radiogroup" aria-label="Color theme"'));
+  assert.ok((html.match(/data-mode="(light|dark|auto)"/g) || []).length >= 3);
+  assert.ok(fs.readFileSync(path.join(root, "assets/theme.js"), "utf8").includes("localStorage.setItem(KEY"));
 });
 console.log(`${n} checks passed`);

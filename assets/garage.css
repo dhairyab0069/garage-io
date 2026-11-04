@@ -1,16 +1,62 @@
 /* The Garage. A dark workshop lit by one tube light: concrete walls, a pegboard, a steel tool chest.
    Motion (the door, the swing of a hung tool, the flicker, dust) is switched off for reduced motion. */
-:root {
+:root, :root[data-theme="dark"] {
   --wall: #26292d; --wall-2: #2f3338; --floor: #17181a;
   --peg: #b98e5b; --peg-dark: #8a6537; --peg-hole: rgba(40, 24, 8, .55);
+  --peg-a: #c39a66; --peg-frame: #5a3f1d; --peg-shadow: 0 18px 40px rgba(0,0,0,.45);
   --steel: #98a3ab; --steel-mid: #6d777f; --steel-dark: #444b51;
   --yellow: #f2b705; --orange: #e8590c; --red: #b3261e;
   --paper: #f4ecd6; --paper-ink: #1d1a14; --ink: #ece7d8; --muted: #a8a699;
-  --light: #fff1c4;
+  --link: #f2b705; --focus: #f2b705; --light: #fff1c4;
+  --grid-h: rgba(0,0,0,.28); --grid-v: rgba(0,0,0,.2);
+  --top-bg: rgba(23, 24, 26, .88); --hover-bg: rgba(255,255,255,.08); --code-bg: rgba(255,255,255,.08);
+  --snd-bg: #33383d; --snd-ink: #ece7d8; --foot-line: #101214; --card-shadow: rgba(0,0,0,.5);
+  --box-ink: #ece7d8; --box-muted: #a8a699;
+  --lamp-glow: 0 0 30px 6px rgba(255, 241, 196, .55), 0 0 90px 24px rgba(255, 241, 196, .2);
+  --beam-top: rgba(255, 241, 196, .22); --mote: rgba(255, 244, 214, .8);
+  --dark-vignette: radial-gradient(ellipse at 50% -10%, rgba(0,0,0,0) 8%, rgba(0,0,0,.88) 72%);
+  --spark-core: 255,240,40; --spark-edge: 255,120,0; --spark-w: 2;
+  --stripe-dark: #1a1300;
   --stencil: Impact, "Arial Narrow Bold", "Haettenschweiler", "Helvetica Neue", Arial, sans-serif;
   --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   color-scheme: dark;
+}
+:root[data-theme="light"] {
+  /* a daylight workshop: bright concrete, warm wood, the same steel door. Yellow stays a fill colour;
+     text and rings that were yellow on dark use deep brown and blue so they keep contrast on concrete. */
+  --wall: #dcd9d0; --wall-2: #e7e4db; --floor: #bdb9ad;
+  --peg: #dcb27c; --peg-dark: #a87c44; --peg-hole: rgba(90, 58, 20, .5);
+  --peg-a: #ebc795; --peg-frame: #8a6a3e; --peg-shadow: 0 14px 28px rgba(60,45,20,.28);
+  --ink: #1d1f22; --muted: #4a4840;
+  --link: #7a3b00; --focus: #1a3fa0; --light: #fffbe6;
+  --grid-h: rgba(70,62,48,.14); --grid-v: rgba(70,62,48,.1);
+  --top-bg: rgba(236, 233, 224, .92); --hover-bg: rgba(0,0,0,.07); --code-bg: rgba(0,0,0,.07);
+  --snd-bg: #f3efe2; --snd-ink: #1d1a14; --foot-line: #b3afa3; --card-shadow: rgba(60,45,20,.28);
+  --lamp-glow: 0 0 22px 4px rgba(255, 250, 225, .9), 0 0 70px 20px rgba(255, 244, 200, .5);
+  --beam-top: rgba(255, 226, 150, .5); --mote: rgba(150, 105, 35, .55);
+  --dark-vignette: radial-gradient(ellipse at 50% -10%, rgba(30,36,46,.1) 8%, rgba(30,36,46,.62) 80%);
+  --spark-core: 255,170,0; --spark-edge: 200,60,0; --spark-w: 2.8;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+  /* a daylight workshop: bright concrete, warm wood, the same steel door. Yellow stays a fill colour;
+     text and rings that were yellow on dark use deep brown and blue so they keep contrast on concrete. */
+  --wall: #dcd9d0; --wall-2: #e7e4db; --floor: #bdb9ad;
+  --peg: #dcb27c; --peg-dark: #a87c44; --peg-hole: rgba(90, 58, 20, .5);
+  --peg-a: #ebc795; --peg-frame: #8a6a3e; --peg-shadow: 0 14px 28px rgba(60,45,20,.28);
+  --ink: #1d1f22; --muted: #4a4840;
+  --link: #7a3b00; --focus: #1a3fa0; --light: #fffbe6;
+  --grid-h: rgba(70,62,48,.14); --grid-v: rgba(70,62,48,.1);
+  --top-bg: rgba(236, 233, 224, .92); --hover-bg: rgba(0,0,0,.07); --code-bg: rgba(0,0,0,.07);
+  --snd-bg: #f3efe2; --snd-ink: #1d1a14; --foot-line: #b3afa3; --card-shadow: rgba(60,45,20,.28);
+  --lamp-glow: 0 0 22px 4px rgba(255, 250, 225, .9), 0 0 70px 20px rgba(255, 244, 200, .5);
+  --beam-top: rgba(255, 226, 150, .5); --mote: rgba(150, 105, 35, .55);
+  --dark-vignette: radial-gradient(ellipse at 50% -10%, rgba(30,36,46,.1) 8%, rgba(30,36,46,.62) 80%);
+  --spark-core: 255,170,0; --spark-edge: 200,60,0; --spark-w: 2.8;
+  color-scheme: light;
+  }
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -18,19 +64,19 @@ html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 body {
   margin: 0; color: var(--ink); font: 16px/1.6 var(--body);
   background:
-    linear-gradient(rgba(0,0,0,.28) 2px, transparent 2px) 0 0 / 100% 64px,
-    linear-gradient(90deg, rgba(0,0,0,.2) 2px, transparent 2px) 0 0 / 128px 64px,
+    linear-gradient(var(--grid-h) 2px, transparent 2px) 0 0 / 100% 64px,
+    linear-gradient(90deg, var(--grid-v) 2px, transparent 2px) 0 0 / 128px 64px,
     var(--wall);
   min-height: 100vh;
 }
 body.door-closed { overflow: hidden; }
-a { color: var(--yellow); text-underline-offset: .18em; }
-:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; border-radius: 4px; }
+a { color: var(--link); text-underline-offset: .18em; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
 .skip { position: absolute; left: .6rem; top: -4rem; z-index: 300; background: var(--yellow); color: #1a1300; padding: .6rem 1rem; font-weight: 700; border-radius: 6px; }
 .skip:focus { top: .6rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .tiny { font-size: .82rem; color: var(--muted); }
-code { font-family: var(--mono); font-size: .88em; background: rgba(255,255,255,.08); padding: .1em .35em; border-radius: 4px; }
+code { font-family: var(--mono); font-size: .88em; background: var(--code-bg); padding: .1em .35em; border-radius: 4px; }
 
 /* ---------- the roller door ---------- */
 .door { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; color: #20242a;
@@ -47,35 +93,53 @@ code { font-family: var(--mono); font-size: .88em; background: rgba(255,255,255,
 .door-btn { font: 800 1.05rem var(--body); letter-spacing: .04em; text-transform: uppercase; color: #1a1300; background: var(--yellow); border: 3px solid #1a1300; border-radius: 8px; padding: .8rem 1.5rem; cursor: pointer; box-shadow: 0 5px 0 #1a1300; transition: transform .12s, box-shadow .12s; }
 .door-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #1a1300; }
 .door-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #1a1300; }
-.door .snd { display: block; margin: 1rem auto 0; }
+.door-ctl { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem .9rem; margin-top: 1rem; }
+.door .snd { display: block; }
 .door-handle { position: absolute; left: 50%; bottom: 6vh; width: 120px; height: 18px; margin-left: -60px; border-radius: 9px; background: linear-gradient(#e6e8ea, #8d949a); box-shadow: 0 3px 6px rgba(0,0,0,.5); }
 
 /* the lights come on after the door is up */
-.dark { position: fixed; inset: 0; z-index: 60; pointer-events: none; background: radial-gradient(ellipse at 50% -10%, rgba(0,0,0,0) 8%, rgba(0,0,0,.88) 72%); opacity: 0; transition: opacity .25s linear; }
+.dark { position: fixed; inset: 0; z-index: 60; pointer-events: none; background: var(--dark-vignette); opacity: 0; transition: opacity .25s linear; }
 body.door-closed .dark { opacity: 1; }
 
 .sparks { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 90; pointer-events: none; }
 
 /* ---------- top bar ---------- */
-.top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 1rem; padding: .55rem 1rem; background: rgba(23, 24, 26, .88); backdrop-filter: blur(8px); border-bottom: 3px solid var(--yellow); }
+.top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 1rem; padding: .55rem 1rem; background: var(--top-bg); backdrop-filter: blur(8px); border-bottom: 3px solid var(--yellow); }
 .top .back { color: var(--ink); text-decoration: none; font-weight: 700; white-space: nowrap; }
 .top nav { display: flex; gap: .3rem; margin: 0 auto; flex-wrap: wrap; }
 .top nav a { color: var(--muted); text-decoration: none; font: 700 .8rem var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: .3rem .6rem; border-radius: 4px; }
-.top nav a:hover { color: var(--ink); background: rgba(255,255,255,.08); }
+.top nav a:hover { color: var(--ink); background: var(--hover-bg); }
 @media (max-width: 720px) { .top nav { display: none; } .top .snd { margin-left: auto; } }
-.snd { font: 700 .78rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: #33383d; border: 2px solid #11131a; border-radius: 6px; padding: .45rem .8rem; cursor: pointer; box-shadow: 0 3px 0 #11131a; }
+@media (max-width: 480px) { .top { gap: .5rem; padding-inline: .6rem; } .top .back .bk { display: none; } .top .back { font-size: 1.3rem; padding: 0 .3rem; } }
+.snd { font: 700 .78rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--snd-ink); background: var(--snd-bg); border: 2px solid #11131a; min-height: 44px; border-radius: 6px; padding: .45rem .8rem; cursor: pointer; box-shadow: 0 3px 0 #11131a; }
 .snd:active { transform: translateY(2px); box-shadow: 0 1px 0 #11131a; }
 .snd[aria-pressed="true"] { background: var(--yellow); color: #1a1300; }
+
+/* theme switch: three icon-only radios (light, dark, auto) */
+.theme-switch{position:relative;display:inline-flex;padding:2px;border:1px solid #11131a;border-radius:999px;background:var(--snd-bg);flex:none}
+.theme-switch::before{content:"";position:absolute;top:2px;left:2px;width:44px;height:44px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 1px #1a1300;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+:root[data-theme-mode="dark"] .theme-switch::before{transform:translateX(44px)}
+:root[data-theme-mode="auto"] .theme-switch::before{transform:translateX(88px)}
+.theme-switch button{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:none;color:var(--snd-ink);cursor:pointer;transition:color .2s,transform .12s}
+.theme-switch button[aria-checked="true"]{color:#1a1300}
+.theme-switch button:hover{color:var(--snd-ink)}
+.theme-switch button[aria-checked="true"]:hover{color:#1a1300}
+.theme-switch button:active{transform:scale(.9)}
+.theme-switch button:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+.theme-switch svg{width:20px;height:20px}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:2}
+.theme-switching,.theme-switching *,.theme-switching *::before,.theme-switching *::after{transition:background-color .5s ease,color .5s ease,border-color .5s ease,fill .5s ease,stroke .5s ease,box-shadow .5s ease !important}
 
 /* ---------- hero ---------- */
 main { max-width: 1120px; margin: 0 auto; padding: 0 1.1rem 3rem; }
 .hero { position: relative; text-align: center; padding: 4.2rem 0 2rem; }
-.lamp { position: absolute; top: 0; left: 50%; width: min(520px, 80%); height: 14px; transform: translateX(-50%); background: #dfe3e6; border-radius: 7px; box-shadow: 0 0 30px 6px rgba(255, 241, 196, .55), 0 0 90px 24px rgba(255, 241, 196, .2); animation: hum 4s ease-in-out infinite; }
+.lamp { position: absolute; top: 0; left: 50%; width: min(520px, 80%); height: 14px; transform: translateX(-50%); background: #dfe3e6; border-radius: 7px; box-shadow: var(--lamp-glow); animation: hum 4s ease-in-out infinite; }
 .lamp i { position: absolute; inset: 3px 8px; border-radius: 4px; background: var(--light); }
 @keyframes hum { 0%, 92%, 100% { opacity: 1; } 94% { opacity: .75; } 96% { opacity: 1; } 97.5% { opacity: .85; } }
 .beam { position: absolute; top: 14px; left: 50%; width: min(760px, 100%); height: 420px; transform: translateX(-50%); pointer-events: none; overflow: hidden;
-  clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%); background: linear-gradient(180deg, rgba(255, 241, 196, .22), rgba(255, 241, 196, 0) 90%); }
-.mote { position: absolute; width: var(--s, 3px); height: var(--s, 3px); border-radius: 50%; background: rgba(255, 244, 214, .8); opacity: 0; animation: drift var(--d, 14s) linear var(--w, 0s) infinite; }
+  clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%); background: linear-gradient(180deg, var(--beam-top), transparent 90%); }
+.mote { position: absolute; width: var(--s, 3px); height: var(--s, 3px); border-radius: 50%; background: var(--mote); opacity: 0; animation: drift var(--d, 14s) linear var(--w, 0s) infinite; }
 @keyframes drift { 0% { transform: translate(0, 0); opacity: 0; } 15% { opacity: .8; } 85% { opacity: .5; } 100% { transform: translate(var(--x, 30px), 220px); opacity: 0; } }
 .sign { position: relative; display: inline-flex; flex-direction: column; gap: .2rem; align-items: center; margin-top: 1.2rem; padding: 1.1rem 2.4rem 1.2rem; font: inherit; color: var(--paper-ink); cursor: pointer;
   background: var(--yellow); border: 6px solid #1a1300; border-radius: 10px; box-shadow: 0 8px 0 #1a1300, 0 20px 40px rgba(0,0,0,.5); transform: rotate(-1.2deg); transition: transform .2s; }
@@ -94,8 +158,8 @@ h2::after { content: ""; display: block; width: 70px; height: 6px; margin-top: .
 
 /* ---------- pegboard ---------- */
 .pegboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px 18px; padding: 30px 26px 34px;
-  background: radial-gradient(circle at 12px 12px, var(--peg-hole) 2.6px, transparent 3.2px) 0 0 / 24px 24px, linear-gradient(135deg, #c39a66, var(--peg));
-  border: 12px solid #5a3f1d; border-radius: 6px; box-shadow: inset 0 0 40px rgba(0,0,0,.35), 0 18px 40px rgba(0,0,0,.45); }
+  background: radial-gradient(circle at 12px 12px, var(--peg-hole) 2.6px, transparent 3.2px) 0 0 / 24px 24px, linear-gradient(135deg, var(--peg-a), var(--peg));
+  border: 12px solid var(--peg-frame); border-radius: 6px; box-shadow: inset 0 0 40px rgba(0,0,0,.3), var(--peg-shadow); }
 .slot { position: relative; min-height: 212px; border: 3px dashed rgba(60, 38, 12, .5); border-radius: 12px; display: grid; place-items: start center; padding-top: 22px; }
 .tool { position: relative; width: 100%; max-width: 178px; padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; transform-origin: 50% -14px; transition: transform .35s cubic-bezier(.3, 1.6, .5, 1), opacity .3s; }
 .tool::before { content: ""; position: absolute; left: 50%; top: -22px; width: 6px; height: 26px; margin-left: -3px; background: linear-gradient(90deg, #656e75, #c8cfd4, #656e75); border-radius: 3px 3px 0 0; }
@@ -129,12 +193,12 @@ h2::after { content: ""; display: block; width: 70px; height: 6px; margin-top: .
 
 /* ---------- locked toolbox ---------- */
 .lockboxes { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
-.lockbox { position: relative; display: block; padding: 1.2rem 1.1rem 1.1rem; text-align: left; font: inherit; color: var(--ink); cursor: pointer;
+.lockbox { position: relative; display: block; padding: 1.2rem 1.1rem 1.1rem; text-align: left; font: inherit; color: var(--box-ink); cursor: pointer;
   background: linear-gradient(180deg, #3b4047, #24282d); border: 3px solid #0d0f11; border-radius: 8px; box-shadow: inset 0 2px 0 rgba(255,255,255,.12), 0 6px 0 #0d0f11; }
 .lockbox .icon { width: 44px; height: 44px; float: right; margin: 0 0 .4rem .6rem; color: var(--yellow); fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; transform-origin: 50% 20%; }
 .lockbox b { display: block; font: 800 1.1rem var(--body); }
-.lockbox small { font: 700 .68rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.lockbox p { clear: both; margin: .7rem 0 0; font-size: .92rem; color: var(--ink); }
+.lockbox small { font: 700 .68rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--box-muted); }
+.lockbox p { clear: both; margin: .7rem 0 0; font-size: .92rem; color: var(--box-ink); }
 .lockbox p[hidden] { display: none; }
 .lockbox.rattle .icon { animation: rattle .5s linear; }
 @keyframes rattle { 0%, 100% { transform: rotate(0); } 12% { transform: rotate(-16deg); } 28% { transform: rotate(14deg); } 44% { transform: rotate(-11deg); } 60% { transform: rotate(9deg); } 76% { transform: rotate(-5deg); } }
@@ -191,7 +255,7 @@ h2::after { content: ""; display: block; width: 70px; height: 6px; margin-top: .
   .sheet.show { transform: translateY(0); }
 }
 
-footer { max-width: 1120px; margin: 2rem auto 0; padding: 1.6rem 1.1rem 3rem; border-top: 3px solid #101214; color: var(--muted); font-size: .92rem; }
+footer { max-width: 1120px; margin: 2rem auto 0; padding: 1.6rem 1.1rem 3rem; border-top: 3px solid var(--foot-line); color: var(--muted); font-size: .92rem; }
 .nojs { padding: 1rem; background: var(--yellow); color: #1a1300; }
 
 /* ---------- reduced motion: no door, no sway, no flicker, no dust ---------- */
@@ -200,6 +264,7 @@ footer { max-width: 1120px; margin: 2rem auto 0; padding: 1.6rem 1.1rem 3rem; bo
   .door { transition: none; }
   .lamp { animation: none; }
   .mote { display: none; }
+  .theme-switch::before, .theme-switch button { transition: none; }
   .tool, .sheet, .tray, .drawer-front, .sign, .build { transition: none; }
   .lockbox.rattle .icon { animation: none; }
 }

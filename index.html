@@ -17,6 +17,17 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="A dark workshop wall with a pegboard and the words The Garage">
 <meta name="twitter:card" content="summary_large_image">
+<script>
+// Shared theme (localStorage 'theme': light | dark | auto). Set before first paint so there is no flash.
+(function () {
+  var m;
+  try { m = localStorage.getItem('theme'); } catch (e) {}
+  if (m !== 'light' && m !== 'dark') m = 'auto';
+  var t = m === 'auto' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : m;
+  var r = document.documentElement;
+  r.setAttribute('data-theme-mode', m); r.setAttribute('data-theme', t); r.style.colorScheme = t;
+})();
+</script>
 <link rel="stylesheet" href="assets/garage.css">
 </head>
 <body class="door-closed">
@@ -32,6 +43,8 @@
     <symbol id="monitor" viewBox="0 0 64 64"><path d="M6 8h52v36H6z"/><path d="M24 56h16M32 44v12"/><path d="m14 18 9 7-9 7M28 34h14"/></symbol>
     <symbol id="box" viewBox="0 0 64 64"><path d="M32 6 56 18v28L32 58 8 46V18z"/><path d="M8 18l24 12 24-12M32 30v28"/><path d="M20 12l24 12"/></symbol>
     <symbol id="taskbar" viewBox="0 0 64 64"><path d="M6 10h52v34H6z"/><path d="M6 44h52v10H6z"/><path d="M10 49h9M24 49h6M34 49h6"/><path d="M14 18h14v10H14z"/></symbol>
+    <symbol id="wand" viewBox="0 0 64 64"><path d="M10 54 40 24"/><path d="m36 20 8 8"/><path d="M46 8v8M42 12h8M54 24v6M51 27h6M22 10v6M19 13h6"/></symbol>
+    <symbol id="swatch" viewBox="0 0 64 64"><path d="M10 10h20v44H10z"/><path d="M30 20l14-8 12 22-14 8"/><path d="M30 54h24v-6H30"/><circle cx="20" cy="46" r="2"/></symbol>
     <symbol id="padlock" viewBox="0 0 64 64"><path d="M14 28h36v28H14z"/><path d="M22 28v-8a10 10 0 0 1 20 0v8"/><path d="M32 38v10"/></symbol>
   </defs>
 </svg>
@@ -45,7 +58,14 @@
     <p class="door-kicker">Dhairya Bhatia</p>
     <p class="door-title">The Garage</p>
     <button type="button" id="open-door" class="door-btn">Open the garage <span aria-hidden="true">▲</span></button>
-    <button type="button" class="snd" data-sound-switch aria-pressed="false"><span class="lbl">Sound off</span></button>
+    <div class="door-ctl">
+      <button type="button" class="snd" data-sound-switch aria-pressed="false"><span class="lbl">Sound off</span></button>
+      <div class="theme-switch" role="radiogroup" aria-label="Color theme">
+      <button type="button" role="radio" aria-checked="false" data-mode="light" aria-label="Light theme" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></button>
+      <button type="button" role="radio" aria-checked="false" data-mode="dark" aria-label="Dark theme" title="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+      <button type="button" role="radio" aria-checked="false" data-mode="auto" aria-label="Match system theme" title="Auto (match system)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+      </div>
+    </div>
   </div>
   <div class="door-handle" aria-hidden="true"></div>
 </div>
@@ -53,11 +73,16 @@
 <canvas id="sparks" class="sparks" aria-hidden="true"></canvas>
 
 <header class="top">
-  <a class="back" href="https://dhairyab0069.github.io/">← dhairyab0069</a>
+  <a class="back" href="https://dhairyab0069.github.io/" aria-label="dhairyab0069 home">← <span class="bk">dhairyab0069</span></a>
   <nav aria-label="Sections">
     <a href="#pegboard">Pegboard</a><a href="#chest">Tool chest</a><a href="#locked">Locked toolbox</a><a href="#logbook">Logbook</a><a href="#shelf">Shelf</a>
   </nav>
   <button type="button" class="snd" data-sound-switch aria-pressed="false"><span class="lbl">Sound off</span></button>
+  <div class="theme-switch" role="radiogroup" aria-label="Color theme">
+  <button type="button" role="radio" aria-checked="false" data-mode="light" aria-label="Light theme" title="Light theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg></button>
+  <button type="button" role="radio" aria-checked="false" data-mode="dark" aria-label="Dark theme" title="Dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg></button>
+  <button type="button" role="radio" aria-checked="false" data-mode="auto" aria-label="Match system theme" title="Auto (match system)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+  </div>
 </header>
 
 <main id="main" tabindex="-1">
@@ -117,6 +142,7 @@
 
 <script src="assets/data.js"></script>
 <script src="assets/sound.js"></script>
+<script src="assets/theme.js"></script>
 <script src="assets/app.js"></script>
 <noscript><p class="nojs">The garage needs JavaScript to hang its tools. The projects are on <a href="https://github.com/dhairyab0069">GitHub</a>.</p></noscript>
 </body>
