@@ -11,6 +11,7 @@ requests. You arrive at a closed roller door; open it and the tube light flicker
 - **the pegboard**: small public tools and experiments, each hung on a hook. Press one to take it off the wall and read its sheet;
 - **the tool chest**: class projects, filed by drawer;
 - **the locked toolbox**: private projects, described but never linked;
+- **the logbook**: the history of some projects, with their old names struck out and a dated timeline;
 - **the shelf**: the bigger builds.
 
 Add a project by editing `assets/data.js`; nothing else needs to change.

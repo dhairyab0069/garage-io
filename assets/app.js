@@ -112,6 +112,33 @@
     boxes.appendChild(b);
   });
 
+  /* ---------- the logbook: what each project was called, and when ---------- */
+  var log = $("#log");
+  G.logbook.forEach(function (e) {
+    var entry = el("div", "entry"), head = el("button", "entry-head"), tray = el("div", "tray"), inner = el("div", "tray-in"), body = el("div", "entry-body");
+    head.type = "button"; head.setAttribute("aria-expanded", "false"); head.setAttribute("aria-controls", "log-" + e.id);
+    head.appendChild(el("span", "entry-title", e.title));
+    var tags = el("span", "nametags");
+    e.names.forEach(function (n, i) {
+      if (i) tags.appendChild(el("span", "arrow", "→"));
+      var t = el("span", "nametag" + (n.current ? " now" : " old"), n.name); t.title = n.note || "";
+      tags.appendChild(t);
+    });
+    head.appendChild(tags);
+    var ol = el("ol", "timeline");
+    e.events.forEach(function (ev) { var li = el("li"); li.appendChild(el("time", "", ev.when)); li.appendChild(el("span", "", ev.text)); ol.appendChild(li); });
+    body.appendChild(ol);
+    if (e.href) body.appendChild(link("Open it", e.href));
+    inner.appendChild(body); tray.appendChild(inner); tray.id = "log-" + e.id; inner.inert = true;
+    head.addEventListener("click", function () {
+      var open = !entry.classList.contains("open");
+      entry.classList.toggle("open", open); head.setAttribute("aria-expanded", String(open)); inner.inert = !open;
+      Sfx.play(open ? "scribble" : "page");
+    });
+    head.addEventListener("pointerenter", function () { Sfx.play("ratchet"); });
+    entry.appendChild(head); entry.appendChild(tray); log.appendChild(entry);
+  });
+
   /* ---------- the shelf ---------- */
   var shelf = $("#builds");
   G.builds.forEach(function (p) {

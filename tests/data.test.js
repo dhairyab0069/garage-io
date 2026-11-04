@@ -15,6 +15,7 @@ const ok = (name, fn) => { fn(); n++; console.log("ok", n, name); };
 
 const symbols = [...html.matchAll(/<symbol id="([^"]+)"/g)].map((m) => m[1]);
 const links = [
+  ...G.logbook.map((e) => e.href).filter(Boolean),
   ...G.tools.flatMap((t) => t.links.map((l) => l.href)),
   ...G.drawers.flatMap((d) => d.items.map((i) => i.href)),
   ...G.builds.map((b) => b.href),
@@ -49,6 +50,22 @@ ok("locked projects have a name and note and NO link of any kind", () => {
     assert.ok(l.name && l.note, l.id);
     assert.deepEqual(Object.keys(l).sort(), ["id", "name", "note"], `${l.id} has extra fields (a link?)`);
   }
+});
+ok("every logbook entry has a title, one current name and at least two dated events", () => {
+  assert.ok(G.logbook.length >= 4);
+  for (const e of G.logbook) {
+    assert.ok(e.id && e.title, e.id);
+    assert.equal(e.names.filter((n) => n.current).length, 1, `${e.id} needs exactly one current name`);
+    assert.ok(e.names.every((n) => n.name), e.id);
+    assert.ok(e.events.length >= 2 && e.events.every((ev) => ev.when && ev.text), e.id);
+  }
+});
+ok("the calendar is listed once: hw4-team-top is its old name, not a separate project", () => {
+  const all = JSON.stringify({ ...G, logbook: [] });
+  assert.ok(!all.includes("Homework 4"), "hw4-team-top is the calendar app");
+  assert.ok(!G.drawers.some((d) => d.items.some((i) => i.href.includes("hw4-team-top"))));
+  const cal = G.logbook.find((e) => e.id === "calendar");
+  assert.deepEqual(Array.from(cal.names, (n) => n.name), ["hw4-team-top", "calendar-app", "Calendar"]);
 });
 ok("all links are https", () => assert.ok(links.every((h) => h.startsWith("https://")), links.join("\n")));
 ok("no link points at a private repo", () => {

@@ -46,8 +46,43 @@ window.GARAGE = {
     { id: "d-se", label: "Software engineering", items: [
       { name: "Q-Clicker", note: "A classroom-response web app built with a structured process, design patterns and tests, for COSC 310.", href: "https://github.com/dhairyab0069/Q-Clicker" } ] },
     { id: "d-pdp", label: "Programming design paradigms", items: [
-      { name: "Calendar", note: "A multi-calendar scheduler in Java, built with a partner for CS 5010. Has its own page on the shelf.", href: "https://dhairyab0069.github.io/calendar-app-io/" },
-      { name: "Homework 4 team repo", note: "Homework 4, a Java team repository.", href: "https://github.com/dhairyab0069/hw4-team-top" } ] }
+      { name: "Calendar", note: "A multi-calendar scheduler in Java, built with a partner for CS 5010 (it began as the team repo hw4-team-top). Now being ported to Rust, and it has its own page on the shelf.", href: "https://dhairyab0069.github.io/calendar-app-io/" } ] }
+  ],
+  logbook: [
+    { id: "calendar", title: "Calendar", href: "https://dhairyab0069.github.io/calendar-app-io/",
+      names: [{ name: "hw4-team-top", note: "the team repo" }, { name: "calendar-app", note: "its own repo" }, { name: "Calendar", current: true }],
+      events: [
+        { when: "Oct 2025", text: "Began as the team repository hw4-team-top for CS 5010, Programming Design Paradigms." },
+        { when: "Jun 2026", text: "A repository of its own, calendar-app, was created for it." },
+        { when: "Nov 2026", text: "The Rust port started with a plan and the model layer, the Java app was archived, and the project page went up." } ] },
+    { id: "himawari", title: "Himawari", href: "https://dhairyab0069.github.io/himawari-io/",
+      names: [{ name: "Hanabi", note: "the first name" }, { name: "Himawari", current: true, note: "向日葵, sunflower" }],
+      events: [
+        { when: "The start", text: "Called Hanabi, after Hanabi for GNOME, the live-wallpaper extension that inspired it." },
+        { when: "Then", text: "Renamed Himawari, which is Japanese for sunflower. The repository was renamed too, and the old address still redirects." },
+        { when: "27 Sep 2026", text: "Beta 1.0 was released." } ] },
+    { id: "abiogenesis", title: "Abiogenesis", href: "https://dhairyab0069.github.io/abiogenesis-io/",
+      names: [{ name: "Abiogenesis", current: true }],
+      events: [
+        { when: "May 2025", text: "First commit: a Java and JavaFX simulation of molecules and amino acid chains. Javadocs came three days later." },
+        { when: "14 Oct 2026", text: "Ported to Rust with egui and shipped as one self-contained app." },
+        { when: "Nov 2026", text: "Version 0.3.0 added the environment, protocells and self-copying RNA strands, on a six-stage roadmap." } ] },
+    { id: "atlas", title: "Atlas", href: "https://github.com/dhairyab0069/Atlas-Mobile",
+      names: [{ name: "Atlas", note: "the Android original" }, { name: "Atlas-Mobile", current: true, note: "the native rewrite" }],
+      events: [
+        { when: "30 Nov 2022", text: "First commit: a gym progress tracker built by a team of five for COSC 341 at UBC Okanagan." },
+        { when: "18 Oct 2026", text: "Rewritten as native apps: SwiftUI for iOS and Kotlin with Compose for Android." } ] },
+    { id: "manifold", title: "Manifold search", href: "https://github.com/dhairyab0069/manifold-search",
+      names: [{ name: "cs5800-project-manifold", note: "the course title" }, { name: "Manifold search", current: true }],
+      events: [
+        { when: "16 Jul 2026", text: "The repository was created for the CS 5800 algorithms project." },
+        { when: "30 Jul 2026", text: "The notebook was uploaded." },
+        { when: "Nov 2026", text: "Split into Part 1, the course exploration, and Part 2, my own research in computational geometry." } ] },
+    { id: "nextcube-terminal", title: "nextcube terminal", href: "https://dhairyab0069.github.io/nextcube-terminal/",
+      names: [{ name: "Workbench", note: "inside this portfolio" }, { name: "nextcube-terminal", current: true }],
+      events: [
+        { when: "The start", text: "Began as the Workbench terminal inside my portfolio site." },
+        { when: "23 Sep 2026", text: "Split out into its own repository, nextcube-terminal, and embedded back into the portfolio." } ] }
   ],
   locked: [
     { id: "focuslock", name: "FocusLock", note: "A minimal macOS focus timer. An LLM watchdog pauses the clock, browsers are filtered for social media, and there are emergency killswitches. Made to be ADHD-friendly." },

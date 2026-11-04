@@ -103,6 +103,11 @@
       hiss({ type: "highpass", f: 3000, dur: 0.45, gain: 0.05, attack: 0.01 });
       for (var i = 0; i < 24; i++) hiss({ at: R(0, 0.5), type: "bandpass", f: R(3000, 8000), q: 2, dur: R(0.004, 0.012), gain: R(0.03, 0.08), attack: 0.001 });
     },
+    scribble: function () {                              // a pen striking out an old name, then a page turned
+      for (var i = 0; i < 9; i++) hiss({ at: i * 0.035, type: "bandpass", f: R(2500, 5500), q: 1.5, dur: 0.05, gain: 0.035, attack: 0.004 });
+      hiss({ at: 0.36, type: "highpass", f: 3000, to: 1500, dur: 0.14, gain: 0.05, attack: 0.02 });
+    },
+    page: function () { hiss({ type: "bandpass", f: 1300, to: 4800, q: 0.5, dur: 0.15, gain: 0.07, attack: 0.025 }); for (var i = 0; i < 8; i++) hiss({ at: R(0.02, 0.16), type: "highpass", f: R(2600, 7000), dur: 0.01, gain: 0.03, attack: 0.001 }); },
     click: function () { thump(0, 0.05, 150); clink(0.005, 2200, 0.02); },            // a heavy switch
     ratchet: function () { hiss({ type: "highpass", f: 4500, dur: 0.012, gain: 0.03, attack: 0.001 }); tone({ f: R(1700, 2100), dur: 0.012, gain: 0.02, attack: 0.001 }); },
     on: function () { clink(0, 2400, 0.05); clink(0.09, 3200, 0.05); }
