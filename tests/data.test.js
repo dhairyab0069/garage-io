@@ -21,7 +21,7 @@ const links = [
   ...G.builds.map((b) => b.href),
 ];
 // private repos and research projects that must not appear anywhere on this public page
-const PRIVATE = ["FocusLock", "ml-course", "MotionBlind", "motiondoctor", "egoexo360", "PolymathOS", "polymathos-kernal", "engine-dev",
+const PRIVATE = ["ml-course", "MotionBlind", "motiondoctor", "egoexo360", "PolymathOS", "polymathos-kernal", "engine-dev",
   "bridge-lab", "auto-rust-hal", "dspy-optimize", "semantic-search-llm", "line_integration", "project-cosc-320", "db_animation", "DevPost"];
 
 ok("every tool has the fields the sheet shows", () => {
@@ -71,6 +71,7 @@ ok("all links are https", () => assert.ok(links.every((h) => h.startsWith("https
 ok("no link points at a private repo", () => {
   for (const h of links) for (const p of PRIVATE) assert.ok(!h.toLowerCase().includes(p.toLowerCase()), `${h} mentions ${p}`);
   assert.ok(!links.some((h) => /github\.com\/dhairyab0069\/nextcube\/?$/.test(h)), "nextcube is private (nextcube-terminal is the public one)");
+  assert.ok(!links.some((h) => /github\.com\/dhairyab0069\/FocusLock\/?$/i.test(h)), "FocusLock source is private: only its page may be linked");
 });
 ok("private names stay out of the page and the data, except the locked toolbox entries", () => {
   const text = html + JSON.stringify({ ...G, locked: [] });

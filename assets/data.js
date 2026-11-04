@@ -67,7 +67,7 @@ window.GARAGE = {
         { when: "May 2025", text: "First commit: a Java and JavaFX simulation of molecules and amino acid chains. Javadocs came three days later." },
         { when: "14 Oct 2026", text: "Ported to Rust with egui and shipped as one self-contained app." },
         { when: "Nov 2026", text: "Version 0.3.0 added the environment, protocells and self-copying RNA strands, on a six-stage roadmap." } ] },
-    { id: "atlas", title: "Atlas", href: "https://github.com/dhairyab0069/Atlas-Mobile",
+    { id: "atlas", title: "Atlas", href: "https://dhairyab0069.github.io/atlas-mobile-io/",
       names: [{ name: "Atlas", note: "the Android original" }, { name: "Atlas-Mobile", current: true, note: "the native rewrite" }],
       events: [
         { when: "30 Nov 2022", text: "First commit: a gym progress tracker built by a team of five for COSC 341 at UBC Okanagan." },
@@ -85,7 +85,6 @@ window.GARAGE = {
         { when: "23 Sep 2026", text: "Split out into its own repository, nextcube-terminal, and embedded back into the portfolio." } ] }
   ],
   locked: [
-    { id: "focuslock", name: "FocusLock", note: "A minimal macOS focus timer. An LLM watchdog pauses the clock, browsers are filtered for social media, and there are emergency killswitches. Made to be ADHD-friendly." },
     { id: "nextcube", name: "nextcube", note: "A NeXTSTEP-styled terminal emulator for macOS and Debian." },
     { id: "ml-course", name: "ML course", note: "A fill-in-the-code course in machine learning, deep learning, NLP, vision, GANs and graphs, with a VS Code coach." }
   ],
@@ -93,6 +92,11 @@ window.GARAGE = {
     { name: "Himawari", note: "A live wallpaper for macOS that turns into your music.", href: "https://dhairyab0069.github.io/himawari-io/" },
     { name: "Abiogenesis", note: "A Rust simulation of how life could start, from soup to self-copying RNA.", href: "https://dhairyab0069.github.io/abiogenesis-io/" },
     { name: "Calendar", note: "A multi-calendar scheduler, on a 1980s office desktop.", href: "https://dhairyab0069.github.io/calendar-app-io/" },
+    { name: "Atlas-Mobile", note: "A gym tracker rewritten natively for iOS and Android from one shared spec.", href: "https://dhairyab0069.github.io/atlas-mobile-io/" },
+    { name: "FocusLock", note: "A focus timer that pauses when you wander. Try the simulator; the source is private.", href: "https://dhairyab0069.github.io/focuslock-io/" },
+    { name: "LucasCheck", note: "A mock store with a working miniature, rebuilt for the web from a database course.", href: "https://dhairyab0069.github.io/lucascheck-io/" },
+    { name: "ML projects", note: "ECG diagnosis and NYC taxi prediction, as a map with a hospital and a taxi stand.", href: "https://dhairyab0069.github.io/ml-projects-io/" },
+    { name: "macOS tools", note: "DepDeck and a Windows-XP-style desktop shell, recreated in the page.", href: "https://dhairyab0069.github.io/macos-tools-io/" },
     { name: "BIOT 6900 report", note: "Alzheimer's disease from genes to drug targets, written up like a medical report.", href: "https://dhairyab0069.github.io/biot6900-io/" }
   ]
 };

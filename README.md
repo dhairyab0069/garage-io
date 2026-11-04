@@ -2,8 +2,7 @@
 
 The project page for my small tools, experiments and class projects:
 **<https://dhairyab0069.github.io/garage-io/>**. The bigger builds have pages of their own
-([Himawari](https://dhairyab0069.github.io/himawari-io/), [Abiogenesis](https://dhairyab0069.github.io/abiogenesis-io/),
-[Calendar](https://dhairyab0069.github.io/calendar-app-io/), [BIOT 6900](https://dhairyab0069.github.io/biot6900-io/)).
+(Himawari, Abiogenesis, Calendar, BIOT 6900, Atlas-Mobile, FocusLock, LucasCheck, the ML projects and the macOS tools: see the shelf).
 
 It is a static site: HTML, CSS and vanilla JavaScript, no build step, no libraries, no fonts, no trackers and no external
 requests. You arrive at a closed roller door; open it and the tube light flickers on over:
